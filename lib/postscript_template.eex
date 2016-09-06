@@ -1,0 +1,9 @@
+500 500 scale
+.1 .1 translate
+0 setlinewidth
+0 0 moveto 1 0 lineto 1 1 lineto 0 1 lineto 0 0 lineto
+<%= for {{x0, y0}, {x1, y1}} <- list do %>
+  <%= x0 %>  <%= y0 %> moveto <%= x1 %> <%= y1 %> lineto
+<% end %>
+stroke
+showpage
