@@ -64,8 +64,6 @@ defmodule FuncGeo do
   """
   @spec div({number, number}, number) :: {number, number}
   def div({x, y}, a) when is_number(a) do
-    # TODO: Raise ArithmeticError if one of the arguments is not a number
-    # o when the divisor is 0
     {x / a, y / a}
   end
 
@@ -113,7 +111,9 @@ defmodule FuncGeo do
   def above(p, q) do
     fn(a, b, c) ->
       c_half = div(c, 2)
-      p.(a, b, c_half) + q.(add(a, c_half), b, c_half)
+      MapSet.new(p.(a, b, c_half))
+      |> MapSet.union(MapSet.new(q.(add(a, c_half), b, c_half)))
+      |> MapSet.to_list()
     end
   end
 
@@ -125,7 +125,9 @@ defmodule FuncGeo do
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       c_scaled = mul(c, n_scaled)
-      p.(add(a, c_scaled), b, mul(c, m_scaled)) + q.(a, b, c_scaled)
+      MapSet.new(p.(add(a, c_scaled), b, mul(c, m_scaled)))
+      |> MapSet.union(MapSet.new(q.(a, b, c_scaled)))
+      |> MapSet.to_list()
     end
   end
 
@@ -136,7 +138,9 @@ defmodule FuncGeo do
   def beside(p, q) do
     fn(a, b, c) ->
       b_half = div(b, 2)
-      p.(a, b_half, c) + q.(add(a, b_half), b_half, c)
+      MapSet.new(p.(a, b_half, c))
+      |> MapSet.union(MapSet.new(q.(add(a, b_half), b_half, c)))
+      |> MapSet.to_list()
     end
   end
 
@@ -148,7 +152,9 @@ defmodule FuncGeo do
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       b_scaled = mul(b, m_scaled)
-      p.(a, b_scaled, c) + q.(add(a, b_scaled), mul(b, n_scaled), c)
+      MapSet.new(p.(a, b_scaled, c))
+      |> MapSet.union(MapSet.new(q.(add(a, b_scaled), mul(b, n_scaled), c)))
+      |> MapSet.to_list()
     end
   end
 
@@ -188,25 +194,24 @@ defmodule FuncGeo do
 
   def over(p, q) do
     fn(a, b, c) ->
-      p.(a, b, c) + q.(a, b, c)
+      MapSet.new(p.(a, b, c))
+      |> MapSet.union(MapSet.new(q.(a, b, c)))
+      |> MapSet.to_list()
     end
   end
 
   @doc """
   """
   def blank do
-    fn(_a, _b, _c) -> {} end
+    fn(_a, _b, _c) -> [{}] end
   end
 
   @doc """
     Writes the given picture function to a PostScript file
   """
   def plot(p) do
-    IO.inspect(p)
-    r = p.({0, 0}, {1, 0}, {0, 1})
-    IO.inspect(r)
-    #content = ps_template(p.({0, 0}, {1, 0}, {0, 1}))
-    #File.write!("output.ps", content)
+    content = ps_template(p.({0, 0}, {1, 0}, {0, 1}))
+    File.write!("output.ps", content)
   end
 
   EEx.function_from_file(:def, :ps_template, Path.expand("postscript_template.eex", __DIR__), [:list])
