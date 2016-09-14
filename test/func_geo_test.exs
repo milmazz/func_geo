@@ -2,7 +2,7 @@ defmodule FuncGeoTest do
   use ExUnit.Case, async: true
   doctest FuncGeo
 
-  import FuncGeo, only: [rot: 1, grid: 3, polygon: 1, beside: 2, above: 2, flip: 1, blank: 0]
+  import FuncGeo, only: [rot: 1, grid: 3, polygon: 1, beside: 2, above: 2, flip: 1, blank: 0, over: 2, plot: 1]
 
   defp man do
       grid(
@@ -41,7 +41,7 @@ defmodule FuncGeoTest do
   end
 
   test "flip(beside(p, q)) must be equal to beside(flip(q), flip(p))" do
-      man = man()
+    man = man()
 
     flipped = flip(beside(man, man))
     man_beside = beside(flip(man), flip(man))
@@ -50,6 +50,35 @@ defmodule FuncGeoTest do
   end
 
   test "blank()" do
-      assert blank().(1, 2, 3) == [{}]
+      assert blank().(1, 2, 3) == []
   end
+
+  test "over(man, man) must be equal to over(man, blank())" do
+    man = man()
+
+    o = over(man, man)
+    b = over(man, blank())
+
+    assert o.({0, 0}, {1, 0}, {0, 1}) == b.({0, 0}, {1, 0}, {0, 1})
+  end
+
+  test "plot produce a PostScript file" do
+    man = man()
+    plot(man)
+
+    content = File.read! "output.ps"
+
+    assert content =~ ~r{500 500 scale(\r)?\n.1 .1 translate}
+    assert content =~ ~r{stroke(\r)?\nshowpage}
+  end
+
+  # TODO: Non-covered tests:
+  #
+  # * above(m, n, p, q)
+  # * beside(m, n, p, q)
+  # * rot45(p)
+  # * quartet(p, q, r, s)
+  # * cycle(p)
+  # * nonet(p, q, r, s, t, u, v, w, x)
+  # * over(p, q)
 end

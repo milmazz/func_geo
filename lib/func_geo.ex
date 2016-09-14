@@ -111,8 +111,8 @@ defmodule FuncGeo do
   def above(p, q) do
     fn(a, b, c) ->
       c_half = div(c, 2)
-      MapSet.new(p.(a, b, c_half))
-      |> MapSet.union(MapSet.new(q.(add(a, c_half), b, c_half)))
+      MapSet.new(p.(add(a, c_half), b, c_half))
+      |> MapSet.union(MapSet.new(q.(a, b, c_half)))
       |> MapSet.to_list()
     end
   end
@@ -173,17 +173,14 @@ defmodule FuncGeo do
   Returns the picture p, q, r and s, layouted in a square
   """
   def quartet(p, q, r, s) do
-    p |> beside(q) |> above(r |> beside(s))
+    above(beside(p, q), beside(r, s))
   end
 
   @doc """
   Returns four times the p, layouted in a square and rotated
   """
   def cycle(p) do
-    q = p |> rot()
-    r = q |> rot()
-    s = r |> rot()
-    p |> quartet(q, r, s)
+    quartet(p, rot(rot(rot(p))), rot(p), rot(rot(p)))
   end
 
   def nonet(p, q, r, s, t, u, v, w, x) do
@@ -203,7 +200,7 @@ defmodule FuncGeo do
   @doc """
   """
   def blank do
-    fn(_a, _b, _c) -> [{}] end
+    fn(_a, _b, _c) -> [] end
   end
 
   @doc """
