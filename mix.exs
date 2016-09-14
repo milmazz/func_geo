@@ -15,6 +15,7 @@ defmodule FuncGeo.Mixfile do
   end
 
   defp deps do
-    []
+    [{:ex_doc, "~> 0.13", only: :dev},
+     {:credo, "~> 0.4", only: [:dev, :test]}]
   end
 end
