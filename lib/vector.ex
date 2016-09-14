@@ -6,7 +6,7 @@ defmodule FuncGeo.Vector do
   @type vector :: {number, number}
 
   @doc """
-  Returns the 2D point addition of `a` and `b` as {a<sub>x</sub> + b<sub>x</sub>, a<sub>y</sub> + b<sub>y</sub>}.
+  Returns the 2D point addition of `a` and `b`.
 
   ## Examples
 
@@ -22,10 +22,10 @@ defmodule FuncGeo.Vector do
   end
 
   @doc """
-  Returns the point subtraction of `a` and `b` as {a<sub>x</sub> - b<sub>x</sub>, a<sub>y</sub> - b<sub>y</sub>}.
+  Returns the point subtraction of `a` and `b`.
 
   ## Examples
-  
+
       iex> a = {1, 2}
       {1, 2}
       iex> FuncGeo.Vector.sub(a, a)

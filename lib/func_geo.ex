@@ -1,8 +1,12 @@
 defmodule FuncGeo do
+  @moduledoc """
+  Functional Geometry
+  """
+
   import Kernel, except: [div: 2]
   import FuncGeo.Vector, only: [add: 2, sub: 2, neg: 1, mul: 2, div: 2]
 
-  require EEx  
+  require EEx
 
   @doc """
   Defines a picture function from lines in a grid
@@ -48,7 +52,11 @@ defmodule FuncGeo do
   def above(p, q) do
     fn(a, b, c) ->
       c_half = div(c, 2)
-      MapSet.new(p.(add(a, c_half), b, c_half))
+
+      a
+      |> add(c_half)
+      |> p.(b, c_half)
+      |> MapSet.new()
       |> MapSet.union(MapSet.new(q.(a, b, c_half)))
       |> MapSet.to_list()
     end
@@ -62,7 +70,11 @@ defmodule FuncGeo do
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       c_scaled = mul(c, n_scaled)
-      MapSet.new(p.(add(a, c_scaled), b, mul(c, m_scaled)))
+
+      a
+      |> add(c_scaled)
+      |> p.(b, mul(c, m_scaled))
+      |> MapSet.new()
       |> MapSet.union(MapSet.new(q.(a, b, c_scaled)))
       |> MapSet.to_list()
     end
@@ -75,7 +87,10 @@ defmodule FuncGeo do
   def beside(p, q) do
     fn(a, b, c) ->
       b_half = div(b, 2)
-      MapSet.new(p.(a, b_half, c))
+
+      a
+      |> p.(b_half, c)
+      |> MapSet.new()
       |> MapSet.union(MapSet.new(q.(add(a, b_half), b_half, c)))
       |> MapSet.to_list()
     end
@@ -89,7 +104,10 @@ defmodule FuncGeo do
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       b_scaled = mul(b, m_scaled)
-      MapSet.new(p.(a, b_scaled, c))
+
+      a
+      |> p.(b_scaled, c)
+      |> MapSet.new()
       |> MapSet.union(MapSet.new(q.(add(a, b_scaled), mul(b, n_scaled), c)))
       |> MapSet.to_list()
     end
@@ -128,7 +146,9 @@ defmodule FuncGeo do
 
   def over(p, q) do
     fn(a, b, c) ->
-      MapSet.new(p.(a, b, c))
+      a
+      |> p.(b, c)
+      |> MapSet.new()
       |> MapSet.union(MapSet.new(q.(a, b, c)))
       |> MapSet.to_list()
     end
@@ -148,5 +168,8 @@ defmodule FuncGeo do
     File.write!("output.ps", content)
   end
 
-  EEx.function_from_file(:def, :to_ps, Path.expand("postscript_template.eex", __DIR__), [:list])
+  EEx.function_from_file(:def,
+                         :to_ps,
+                         Path.expand("postscript_template.eex", __DIR__),
+                         [:list])
 end
