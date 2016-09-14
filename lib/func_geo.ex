@@ -1,71 +1,8 @@
 defmodule FuncGeo do
   import Kernel, except: [div: 2]
-  require EEx
+  import FuncGeo.Vector, only: [add: 2, sub: 2, neg: 1, mul: 2, div: 2]
 
-  @doc """
-  Returns the point addition of `a` and `b`.
-
-  iex> a = {1, 2}
-  {1, 2}
-  iex> FuncGeo.add(a, a)
-  {2, 4}
-  """
-  @spec add({number, number}, {number, number}) :: {number, number}
-  def add({x0, y0}, {x1, y1}) do
-    {x0 + x1, y0 + y1}
-  end
-
-  @doc """
-  Returns the point subtraction of `a` and `b`.
-
-  iex> a = {1, 2}
-  {1, 2}
-  iex> FuncGeo.sub(a, a)
-  {0, 0}
-  """
-  @spec sub({number, number}, {number, number}) :: {number, number}
-  def sub({x0, y0}, {x1, y1}) do
-    {x0 - x1, y0 - y1}
-  end
-
-  @doc """
-  Returns the point negation
-
-  iex> a = {1, 2}
-  {1, 2}
-  iex> FuncGeo.neg(a)
-  {-1, -2}
-  """
-  @spec neg({number, number}) :: {number, number}
-  def neg({x, y}) do
-    {-x, -y}
-  end
-
-  @doc """
-  Returns the point scalar multiplication
-
-  iex> a = {1, 2}
-  {1, 2}
-  iex> FuncGeo.mul(a, 2)
-  {2, 4}
-  """
-  @spec mul({number, number}, number) :: {number, number}
-  def mul({x, y}, a) when is_number(a) do
-    {x * a, y * a}
-  end
-
-  @doc """
-  Returns the point scalar division
-
-  iex> a = {2, 4}
-  {2, 4}
-  iex> FuncGeo.div(a, 2)
-  {1.0, 2.0}
-  """
-  @spec div({number, number}, number) :: {number, number}
-  def div({x, y}, a) when is_number(a) do
-    {x / a, y / a}
-  end
+  require EEx  
 
   @doc """
   Defines a picture function from lines in a grid
@@ -207,9 +144,9 @@ defmodule FuncGeo do
     Writes the given picture function to a PostScript file
   """
   def plot(p) do
-    content = ps_template(p.({0, 0}, {1, 0}, {0, 1}))
+    content = to_ps(p.({0, 0}, {1, 0}, {0, 1}))
     File.write!("output.ps", content)
   end
 
-  EEx.function_from_file(:def, :ps_template, Path.expand("postscript_template.eex", __DIR__), [:list])
+  EEx.function_from_file(:def, :to_ps, Path.expand("postscript_template.eex", __DIR__), [:list])
 end
