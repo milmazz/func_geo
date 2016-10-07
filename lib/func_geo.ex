@@ -142,7 +142,7 @@ defmodule FuncGeo do
 
   @doc """
   Rotates a picture about its top left corner, through 45 degrees
-  anticlockwise. It also reduces the picture is size by sqrt(2)
+  anticlockwise. It also reduces the picture is size by `sqrt(2)`
   """
   def rot45(p) do
     fn(a, b, c) ->
@@ -171,6 +171,9 @@ defmodule FuncGeo do
                 beside(1, 2, v, beside(1, 1, w, x))))
   end
 
+  @doc """
+  Overlays one picture `p` directly on top of the other picture `q`
+  """
   def over(p, q) do
     fn(a, b, c) ->
       a
@@ -182,17 +185,18 @@ defmodule FuncGeo do
   end
 
   @doc """
+  Represents an empty picture
   """
   def blank do
     fn(_a, _b, _c) -> [] end
   end
 
   @doc """
-    Writes the given picture function to a PostScript file
+  Writes the given picture function to a PostScript file
   """
-  def plot(p) do
+  def plot(p, output \\ "output.ps") do
     content = to_ps(p.({0, 0}, {1, 0}, {0, 1}))
-    File.write!("output.ps", content)
+    File.write!(output, content)
   end
 
   EEx.function_from_file(:def,

@@ -64,4 +64,4 @@ pseudocorner = F.quartet(corner2, side2, F.rot(side2), F.rot(t))
 fishes = F.cycle(pseudocorner)
 
 # Draw the fishes
-F.plot(fishes)
+F.plot(fishes, "fishes.ps")
