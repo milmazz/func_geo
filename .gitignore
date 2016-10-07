@@ -3,5 +3,4 @@
 /deps
 erl_crash.dump
 *.ez
-*.ps
 doc/
