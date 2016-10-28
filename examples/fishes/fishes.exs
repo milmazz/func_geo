@@ -1,5 +1,5 @@
-Code.require_file("vector.ex", Path.join(__DIR__, "../lib"))
-Code.require_file("func_geo.ex", Path.join(__DIR__, "../lib"))
+Code.require_file("vector.ex", Path.join(__DIR__, "../../lib"))
+Code.require_file("func_geo.ex", Path.join(__DIR__, "../../lib"))
 
 alias FuncGeo, as: F
 
