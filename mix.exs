@@ -7,7 +7,8 @@ defmodule FuncGeo.Mixfile do
      elixir: "~> 1.3-dev",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+     docs: docs()]
   end
 
   def application do
@@ -15,7 +16,10 @@ defmodule FuncGeo.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, "~> 0.13", only: :dev},
-     {:credo, "~> 0.4", only: [:dev, :test]}]
+    [{:ex_doc, "~> 0.13", only: :dev}]
+  end
+
+  defp docs do
+    [main: "FuncGeo", extras: ["README.md"]]
   end
 end
