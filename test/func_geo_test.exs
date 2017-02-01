@@ -23,12 +23,12 @@ defmodule FuncGeoTest do
   end
 
   test "rot(above(p, q)) must be equal to beside(rot(p), rot(q))" do
-      man = man()
+    man = man()
 
-      man_rotated = rot(above(man, man))
-      man_beside = beside(rot(man), rot(man))
+    man_rotated = rot(above(man, man))
+    man_beside = beside(rot(man), rot(man))
 
-      assert man_rotated.({0, 0}, {1, 0}, {0, 1}) == man_beside.({0, 0}, {1, 0}, {0, 1})
+    assert man_rotated.({0, 0}, {1, 0}, {0, 1}) == man_beside.({0, 0}, {1, 0}, {0, 1})
   end
 
   test "rot(beside(p, q)) must be equal to above(rot(q), rot(p))" do
@@ -50,7 +50,7 @@ defmodule FuncGeoTest do
   end
 
   test "blank()" do
-      assert blank().(1, 2, 3) == []
+    assert blank().(1, 2, 3) == []
   end
 
   test "over(man, man) must be equal to over(man, blank())" do
