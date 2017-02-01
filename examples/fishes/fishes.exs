@@ -3,6 +3,7 @@ Code.require_file("func_geo.ex", Path.join(__DIR__, "../../lib"))
 
 alias FuncGeo, as: F
 
+# Basic pictures: p, q, r, s
 p = F.grid(
         16, 16,
         [{{4, 4}, {6, 0}}, {{0, 3}, {3, 4}}, {{3, 4}, {0, 8}},
@@ -54,14 +55,16 @@ s = F.grid(
      {{13, 13}, {16, 14}}, {{14, 11}, {16, 12}}, {{15, 9}, {16, 10}}])
 
 # Build the drawing of the fish out of the parts defined above
+
 t = F.quartet(p, q, r, s)
-u = q |> F.rot() |> F.cycle()
+
 side1 = F.quartet(F.blank(), F.blank(), F.rot(t), t)
 side2 = F.quartet(side1, side1, F.rot(t), t)
+
+u = q |> F.rot() |> F.cycle()
 corner1 = F.quartet(F.blank(), F.blank(), F.blank(), u)
 corner2 = F.quartet(corner1, side1, F.rot(side1), u)
-pseudocorner = F.quartet(corner2, side2, F.rot(side2), F.rot(t))
-pseudolimit = F.cycle(pseudocorner)
+
 corner = F.nonet(corner2, side2, side2, F.rot(side2), u, F.rot(t),
                  F.rot(side2), F.rot(t), F.rot(q))
 squarelimit = F.cycle(corner)

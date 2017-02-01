@@ -12,10 +12,10 @@ f = F.grid(
 # Basic Operations
 rot_f = F.rot(f)
 flip_f = F.flip(f)
-rot_flip_f = F.rot(F.flip(f))
+rot_flip_f = f |> F.flip() |> F.rot()
 above_f = F.above(f, f)
 beside_f = F.beside(f, f)
-above_beside_f = F.above(F.beside(f, f), f)
+above_beside_f = f |> F.beside(f) |> F.above(f)
 rot45 = F.rot45(f)
 over = F.over(f, F.flip(f))
 
