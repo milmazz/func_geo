@@ -39,7 +39,7 @@ defmodule FuncGeo do
   Defines a picture function from lines in a grid
   """
   def grid(m, n, s) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       for {{x0, y0}, {x1, y1}} <- s do
         {Enum.reduce([div(mul(b, x0), m), a, div(mul(c, y0), n)], &add/2),
          Enum.reduce([div(mul(b, x1), m), a, div(mul(c, y1), n)], &add/2)}
@@ -58,7 +58,7 @@ defmodule FuncGeo do
   Returns picture `p` rotated anticlockwise by 90 degrees
   """
   def rot(p) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       p.(add(a, b), c, neg(b))
     end
   end
@@ -67,7 +67,7 @@ defmodule FuncGeo do
   Returns picture `p` flipped through its vertical centre axis
   """
   def flip(p) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       p.(add(a, b), neg(b), c)
     end
   end
@@ -77,7 +77,7 @@ defmodule FuncGeo do
   the lower half
   """
   def above(p, q) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       c_half = div(c, 2)
 
       a
@@ -93,7 +93,7 @@ defmodule FuncGeo do
   Place picture `p` above `q` scaled by `m` and `n`
   """
   def above(m, n, p, q) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       c_scaled = mul(c, n_scaled)
@@ -112,7 +112,7 @@ defmodule FuncGeo do
   the right half
   """
   def beside(p, q) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       b_half = div(b, 2)
 
       a
@@ -127,7 +127,7 @@ defmodule FuncGeo do
   Place picture `p` besides `q` scaled by `m` and `n`
   """
   def beside(m, n, p, q) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       m_scaled = m / (m + n)
       n_scaled = n / (m + n)
       b_scaled = mul(b, m_scaled)
@@ -145,7 +145,7 @@ defmodule FuncGeo do
   anticlockwise. It also reduces the picture is size by `sqrt(2)`
   """
   def rot45(p) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       bc_half = div(add(b, c), 2)
       p.(add(a, bc_half), bc_half, div(sub(c, b), 2))
     end
@@ -175,7 +175,7 @@ defmodule FuncGeo do
   Overlays one picture `p` directly on top of the other picture `q`
   """
   def over(p, q) do
-    fn(a, b, c) ->
+    fn a, b, c ->
       a
       |> p.(b, c)
       |> MapSet.new()
@@ -188,7 +188,7 @@ defmodule FuncGeo do
   Represents an empty picture
   """
   def blank do
-    fn(_a, _b, _c) -> [] end
+    fn _a, _b, _c -> [] end
   end
 
   @doc """
@@ -197,12 +197,7 @@ defmodule FuncGeo do
   def plot(p, options \\ []) do
     format = Keyword.get(options, :format, "ps")
     output = Keyword.get(options, :file_name, "output")
-    callback =
-      if format == "ps" do
-        fn x -> as_ps(x) end
-      else
-        fn x -> as_svg(x) end
-      end
+    callback = if format == "ps", do: &as_ps/1, else: &as_svg/1
 
     content = callback.(p.({0, 0}, {1, 0}, {0, 1}))
     File.write!("#{output}.#{format}", content)
@@ -212,7 +207,6 @@ defmodule FuncGeo do
                          :as_ps,
                          Path.expand("templates/postscript.eex", __DIR__),
                          [:list])
-
 
   EEx.function_from_file(:def,
                          :as_svg,
