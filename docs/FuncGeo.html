@@ -1,0 +1,576 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.15.0">
+    <title>FuncGeo – func_geo v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-f7824c48e6.css" />
+    
+    <script src="dist/sidebar_items-252294c95e.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="FuncGeo.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        func_geo
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">func_geo v0.0.1</small>
+        FuncGeo
+        
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Functional Geometry</p>
+<p>This work is based on the <em>Functional Geometry</em> paper by <a href="http://users.ecs.soton.ac.uk/ph/" title="">Peter Henderson</a>,
+the most recent version of this document is from <a href="http://users.ecs.soton.ac.uk/ph/papers/funcgeo2.pdf" title="">2002</a>, the original
+version is from <a href="http://users.ecs.soton.ac.uk/ph/funcgeo.pdf" title="">1982</a>. In this paper Peter Henderson deconstructs
+the <a href="http://www.wikiart.org/en/m-c-escher" title="">M.C. Escher</a>’s woodcut <a href="http://www.wikiart.org/en/m-c-escher/square-limit" title="">Square Limit</a> using
+an <em>algebra of pictures</em>.</p>
+<p>Peter Henderson also mentions that this idea can be applied to many more complex
+domains such as music or animation.</p>
+<h2 id="module-other-implementations" class="section-heading">
+  <a href="#module-other-implementations" class="hover-link"><i class="icon-link"></i></a>
+  Other implementations
+</h2>
+
+<ul>
+<li><a href="http://www.frank-buss.de/lisp/functional.html" title="">Lisp</a> by Frank Buß
+</li>
+<li><a href="https://blogs.msdn.microsoft.com/satnam_singh/2010/01/05/an-f-functional-geometry-description-of-eschers-fish/" title="">F#</a> by Satnam Singh
+</li>
+<li><a href="https://github.com/mccutchen/funcgeo/blob/master/funcgeo.py" title="">Python</a> and <a href="https://github.com/mccutchen/funcgeo/blob/master/funcgeo.hs" title="">Haskell</a> by Will McCutchen
+</li>
+<li><a href="https://shashi.github.io/ijulia-notebooks/funcgeo/" title="">Julia</a> by Shashi Gowda
+</li>
+</ul>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#above/2">above(p, q)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns picture that has <code class="inline">p</code> in the upper half of its locating box and <code class="inline">q</code> in
+the lower half</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#above/4">above(m, n, p, q)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place picture <code class="inline">p</code> above <code class="inline">q</code> scaled by <code class="inline">m</code> and <code class="inline">n</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#as_ps/1">as_ps(list)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#as_svg/1">as_svg(list)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#beside/2">beside(p, q)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns picture that has <code class="inline">p</code> in the left half of its locating box and <code class="inline">q</code> in
+the right half</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#beside/4">beside(m, n, p, q)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place picture <code class="inline">p</code> besides <code class="inline">q</code> scaled by <code class="inline">m</code> and <code class="inline">n</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#blank/0">blank()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Represents an empty picture</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#cycle/1">cycle(p)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns four times the p, layouted in a square and rotated</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#flip/1">flip(p)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns picture <code class="inline">p</code> flipped through its vertical centre axis</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#grid/3">grid(m, n, s)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Defines a picture function from lines in a grid</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#nonet/9">nonet(p, q, r, s, t, u, v, w, x)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#over/2">over(p, q)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Overlays one picture <code class="inline">p</code> directly on top of the other picture <code class="inline">q</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#plot/2">plot(p, options \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Writes the given picture in the given format</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#polygon/1">polygon(points)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Convert the given points, which specifies a polygon, in a list of lines</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#quartet/4">quartet(p, q, r, s)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the picture p, q, r and s, layouted in a square</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#rot/1">rot(p)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns picture <code class="inline">p</code> rotated anticlockwise by 90 degrees</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#rot45/1">rot45(p)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Rotates a picture about its top left corner, through 45 degrees
+anticlockwise. It also reduces the picture is size by <code class="inline">sqrt(2)</code></p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="above/2">
+  
+  <div class="detail-header">
+    <a href="#above/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">above(p, q)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns picture that has <code class="inline">p</code> in the upper half of its locating box and <code class="inline">q</code> in
+the lower half</p>
+
+  </section>
+</div>
+<div class="detail" id="above/4">
+  
+  <div class="detail-header">
+    <a href="#above/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">above(m, n, p, q)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Place picture <code class="inline">p</code> above <code class="inline">q</code> scaled by <code class="inline">m</code> and <code class="inline">n</code></p>
+
+  </section>
+</div>
+<div class="detail" id="as_ps/1">
+  
+  <div class="detail-header">
+    <a href="#as_ps/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">as_ps(list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="as_svg/1">
+  
+  <div class="detail-header">
+    <a href="#as_svg/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">as_svg(list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="beside/2">
+  
+  <div class="detail-header">
+    <a href="#beside/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">beside(p, q)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns picture that has <code class="inline">p</code> in the left half of its locating box and <code class="inline">q</code> in
+the right half</p>
+
+  </section>
+</div>
+<div class="detail" id="beside/4">
+  
+  <div class="detail-header">
+    <a href="#beside/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">beside(m, n, p, q)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Place picture <code class="inline">p</code> besides <code class="inline">q</code> scaled by <code class="inline">m</code> and <code class="inline">n</code></p>
+
+  </section>
+</div>
+<div class="detail" id="blank/0">
+  
+  <div class="detail-header">
+    <a href="#blank/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">blank()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Represents an empty picture</p>
+
+  </section>
+</div>
+<div class="detail" id="cycle/1">
+  
+  <div class="detail-header">
+    <a href="#cycle/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">cycle(p)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns four times the p, layouted in a square and rotated</p>
+
+  </section>
+</div>
+<div class="detail" id="flip/1">
+  
+  <div class="detail-header">
+    <a href="#flip/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">flip(p)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns picture <code class="inline">p</code> flipped through its vertical centre axis</p>
+
+  </section>
+</div>
+<div class="detail" id="grid/3">
+  
+  <div class="detail-header">
+    <a href="#grid/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">grid(m, n, s)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Defines a picture function from lines in a grid</p>
+
+  </section>
+</div>
+<div class="detail" id="nonet/9">
+  
+  <div class="detail-header">
+    <a href="#nonet/9" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">nonet(p, q, r, s, t, u, v, w, x)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="over/2">
+  
+  <div class="detail-header">
+    <a href="#over/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">over(p, q)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Overlays one picture <code class="inline">p</code> directly on top of the other picture <code class="inline">q</code></p>
+
+  </section>
+</div>
+<div class="detail" id="plot/2">
+  
+    <span id="plot/1" />
+  
+  <div class="detail-header">
+    <a href="#plot/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">plot(p, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Writes the given picture in the given format.</p>
+
+  </section>
+</div>
+<div class="detail" id="polygon/1">
+  
+  <div class="detail-header">
+    <a href="#polygon/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">polygon(points)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Convert the given points, which specifies a polygon, in a list of lines</p>
+
+  </section>
+</div>
+<div class="detail" id="quartet/4">
+  
+  <div class="detail-header">
+    <a href="#quartet/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">quartet(p, q, r, s)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the picture p, q, r and s, layouted in a square</p>
+
+  </section>
+</div>
+<div class="detail" id="rot/1">
+  
+  <div class="detail-header">
+    <a href="#rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">rot(p)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns picture <code class="inline">p</code> rotated anticlockwise by 90 degrees</p>
+
+  </section>
+</div>
+<div class="detail" id="rot45/1">
+  
+  <div class="detail-header">
+    <a href="#rot45/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">rot45(p)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Rotates a picture about its top left corner, through 45 degrees
+anticlockwise. It also reduces the picture is size by <code class="inline">sqrt(2)</code></p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.15.0),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-372682077e.js"></script>
+  </body>
+</html>
+

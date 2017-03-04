@@ -20,6 +20,6 @@ defmodule FuncGeo.Mixfile do
   end
 
   defp docs do
-    [main: "FuncGeo", extras: ["README.md"]]
+    [main: "FuncGeo", output: "docs", extras: ["README.md"]]
   end
 end
