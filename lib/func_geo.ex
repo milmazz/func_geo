@@ -192,15 +192,30 @@ defmodule FuncGeo do
   end
 
   @doc """
-  Writes the given picture function to a PostScript file
+  Writes the given picture in the given format.
   """
-  def plot(p, output \\ "output.ps") do
-    content = to_ps(p.({0, 0}, {1, 0}, {0, 1}))
-    File.write!(output, content)
+  def plot(p, options \\ []) do
+    format = Keyword.get(options, :format, "ps")
+    output = Keyword.get(options, :file_name, "output")
+    callback =
+      if format == "ps" do
+        fn x -> as_ps(x) end
+      else
+        fn x -> as_svg(x) end
+      end
+
+    content = callback.(p.({0, 0}, {1, 0}, {0, 1}))
+    File.write!("#{output}.#{format}", content)
   end
 
   EEx.function_from_file(:def,
-                         :to_ps,
-                         Path.expand("postscript_template.eex", __DIR__),
+                         :as_ps,
+                         Path.expand("templates/postscript.eex", __DIR__),
+                         [:list])
+
+
+  EEx.function_from_file(:def,
+                         :as_svg,
+                         Path.expand("templates/svg.eex", __DIR__),
                          [:list])
 end
