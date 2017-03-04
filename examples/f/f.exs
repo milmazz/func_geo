@@ -10,22 +10,20 @@ f = F.grid(
 
 
 # Basic Operations
-rot_f = F.rot(f)
-flip_f = F.flip(f)
-rot_flip_f = f |> F.flip() |> F.rot()
-above_f = F.above(f, f)
-beside_f = F.beside(f, f)
-above_beside_f = f |> F.beside(f) |> F.above(f)
-rot45 = F.rot45(f)
-over = F.over(f, F.flip(f))
+pictures = [
+  f: f,
+  rot_f: F.rot(f),
+  flip_f: F.flip(f),
+  rot_flip_f: f |> F.flip() |> F.rot(),
+  above_f: F.above(f, f),
+  beside_f: F.beside(f, f),
+  above_beside_f: f |> F.beside(f) |> F.above(f),
+  rot45: F.rot45(f),
+  over: F.over(f, F.flip(f)),
+]
 
-# Draw every picture
-F.plot(f, "f.ps")
-F.plot(rot_f, "rot_f.ps")
-F.plot(flip_f, "flip_f.ps")
-F.plot(rot_flip_f, "rot_flip_f.ps")
-F.plot(above_f, "above_f.ps")
-F.plot(beside_f, "beside_f.ps")
-F.plot(above_beside_f, "above_beside_f.ps")
-F.plot(rot45, "rot45.ps")
-F.plot(over, "over.ps")
+# Draw every picture as Postscript and SVG
+for {file_name, picture} <- pictures do
+  F.plot(picture, [format: "ps", file_name: Atom.to_string(file_name)])
+  F.plot(picture, [format: "svg", file_name: Atom.to_string(file_name)])
+end

@@ -69,18 +69,23 @@ corner = F.nonet(corner2, side2, side2, F.rot(side2), u, F.rot(t),
                  F.rot(side2), F.rot(t), F.rot(q))
 squarelimit = F.cycle(corner)
 
-# Draw the fishes
-F.plot(p, "p.ps")
-F.plot(q, "q.ps")
-F.plot(r, "r.ps")
-F.plot(s, "s.ps")
-F.plot(t, "t.ps")
-F.plot(u, "u.ps")
-F.plot(side1, "side1.ps")
-F.plot(side2, "side2.ps")
-F.plot(corner1, "corner1.ps")
-F.plot(corner2, "corner2.ps")
-F.plot(pseudocorner, "pseudocorner.ps")
-F.plot(pseudolimit, "pseudolimit.ps")
-F.plot(corner, "corner.ps")
-F.plot(squarelimit, "squarelimit.ps")
+# Summary
+pictures = [
+  p: p,
+  q: q,
+  r: r,
+  s: s,
+  t: t,
+  u: u,
+  side1: side1,
+  side2: side2,
+  corner1: corner1,
+  corner2: corner2,
+  corner: corner,
+  squarelimit: squarelimit
+]
+
+for {file_name, picture} <- pictures do
+  F.plot(picture, [format: "ps", file_name: Atom.to_string(file_name)])
+  F.plot(picture, [format: "svg", file_name: Atom.to_string(file_name)])
+end
