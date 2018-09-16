@@ -72,7 +72,7 @@ defmodule FuncGeo do
     end
   end
 
- @doc """
+  @doc """
   Returns picture that has `p` in the upper half of its locating box and `q` in
   the lower half
   """
@@ -166,9 +166,12 @@ defmodule FuncGeo do
   end
 
   def nonet(p, q, r, s, t, u, v, w, x) do
-    above(1, 2, beside(1, 2, p, beside(1, 1, q, r)),
-          above(1, 1, beside(1, 2, s, beside(1, 1, t, u)),
-                beside(1, 2, v, beside(1, 1, w, x))))
+    above(
+      1,
+      2,
+      beside(1, 2, p, beside(1, 1, q, r)),
+      above(1, 1, beside(1, 2, s, beside(1, 1, t, u)), beside(1, 2, v, beside(1, 1, w, x)))
+    )
   end
 
   @doc """
@@ -203,13 +206,17 @@ defmodule FuncGeo do
     File.write!("#{output}.#{format}", content)
   end
 
-  EEx.function_from_file(:def,
-                         :as_ps,
-                         Path.expand("templates/postscript.eex", __DIR__),
-                         [:list])
+  EEx.function_from_file(
+    :def,
+    :as_ps,
+    Path.expand("templates/postscript.eex", __DIR__),
+    [:list]
+  )
 
-  EEx.function_from_file(:def,
-                         :as_svg,
-                         Path.expand("templates/svg.eex", __DIR__),
-                         [:list])
+  EEx.function_from_file(
+    :def,
+    :as_svg,
+    Path.expand("templates/svg.eex", __DIR__),
+    [:list]
+  )
 end

@@ -2,16 +2,52 @@ defmodule FuncGeoTest do
   use ExUnit.Case, async: true
   doctest FuncGeo
 
-  import FuncGeo, only: [rot: 1, grid: 3, polygon: 1, beside: 2, above: 2, flip: 1, blank: 0, over: 2, plot: 1, plot: 2]
+  import FuncGeo,
+    only: [
+      rot: 1,
+      grid: 3,
+      polygon: 1,
+      beside: 2,
+      above: 2,
+      flip: 1,
+      blank: 0,
+      over: 2,
+      plot: 1,
+      plot: 2
+    ]
 
   defp man do
-      grid(
-        14, 20,
-        polygon([{6, 10}, {0, 10}, {0, 12}, {6, 12}, {6, 14},
-                {4, 16}, {4, 18}, {6, 20}, {8, 20}, {10, 18},
-                {10, 16}, {8, 14}, {8, 12}, {10, 12}, {10, 14},
-                {12, 14}, {12, 10}, {8, 10}, {8, 8}, {10, 0},
-                {8, 0}, {7, 4}, {6, 0}, {4, 0}, {6, 8}]))
+    grid(
+      14,
+      20,
+      polygon([
+        {6, 10},
+        {0, 10},
+        {0, 12},
+        {6, 12},
+        {6, 14},
+        {4, 16},
+        {4, 18},
+        {6, 20},
+        {8, 20},
+        {10, 18},
+        {10, 16},
+        {8, 14},
+        {8, 12},
+        {10, 12},
+        {10, 14},
+        {12, 14},
+        {12, 10},
+        {8, 10},
+        {8, 8},
+        {10, 0},
+        {8, 0},
+        {7, 4},
+        {6, 0},
+        {4, 0},
+        {6, 8}
+      ])
+    )
   end
 
   test "p is equal after four continuos rotations" do
@@ -66,7 +102,7 @@ defmodule FuncGeoTest do
     man = man()
     plot(man)
 
-    content = File.read! "output.ps"
+    content = File.read!("output.ps")
 
     assert content =~ ~r{500 500 scale(\r)?\n.1 .1 translate}
     assert content =~ ~r{stroke(\r)?\nshowpage}
@@ -74,7 +110,7 @@ defmodule FuncGeoTest do
 
   test "plot produce a SVG file if specified" do
     man = man()
-    plot(man, [format: "svg"])
+    plot(man, format: "svg")
 
     content = File.read!("output.svg")
 
