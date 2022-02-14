@@ -20,15 +20,15 @@ defmodule FuncGeo.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger], extra_applications: [:eex]]
   end
 
   defp deps do
     [
-      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.5.7", only: :test},
-      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false}
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.14", only: :test},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.1", only: [:dev], runtime: false}
     ]
   end
 
